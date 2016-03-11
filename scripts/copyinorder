@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Copyright © 2012 Alex Kost
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+DirCheck() {
+    if [ ! -d "$1" ]; then
+        echo "$1 - is not a directory"
+        exit 1
+    fi
+}
+
+DirCheck "$1"
+DirCheck "$2"
+
+# Getting destination variable and moving to the source directory.
+pushd "$2" > /dev/null
+dest=$(pwd)
+popd > /dev/null
+cd "$1"
+source=$(pwd)
+
+echo "COPYING \"$source\" INTO \"$dest\""
+dest=$dest/$(basename "$source")
+
+echo -e "\n---- Making directory structure"
+mkdir -v "$dest"
+find . -type d | sed 1d | sort | xargs -I === mkdir -v "$dest/==="
+
+filesAmount=$(find . -type f | wc -l)
+echo -e "\n---- Copying files (total $filesAmount):"
+num=0
+
+# TODO Do not hardcode "mp3"; make a script option to pass to "find".
+find . -type f -name '*.mp3' | sort | while read fl
+do
+    let num+=1 #num=$(($num+1))
+    echo "($num of $filesAmount):  $dest/$fl"
+    cp "$fl" "$dest/$fl"
+done
+
+echo -e "\nThe job has been done."

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: mailto
+Handle "mailto:..." argument to compose a mail in emacs.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+emacsclient --no-wait --socket-name=server-emms \
+            --eval "(compose-mail (url-unhex-string \"${1#mailto:}\"))"
+wmctrl -x -a "emacs"

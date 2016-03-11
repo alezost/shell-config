@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Use 'halt' on GuixSD.
+if [ -d "/run/current-system" ]; then
+    sudo /run/current-system/profile/sbin/halt
+else
+    sudo /sbin/shutdown "$@"
+fi

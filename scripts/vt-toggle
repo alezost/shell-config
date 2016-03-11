@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: vt-toggle
+Toggle VT7 (graphical) and VT11 (empty).'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+fgconsole
+if [ $? -eq 0 ]; then
+    sudo chvt 7
+else
+    sudo chvt 11
+fi

@@ -1,0 +1,8 @@
+This repository contains my bash configuration and some shell scripts I
+use.  Most of the scripts I wrote myself and some were inspired and
+derived from other scripts out there (there are links to the original
+sources).
+
+Although all scripts have a =#!/bin/sh= shebang, actually some of them
+are bash scripts, but since we don't have =/bin/bash= in a [[http://www.gnu.org/software/guix/][Guix System
+Distribution]], I just use =/bin/sh= everywhere.

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: conkeror-eval arg
+Evaluate ARG as a Conkeror command (using "conkeror -f").
+Activate Conkeror if it is not activated.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+conkeror -f "$1" &
+wmctrl -xa conkeror &

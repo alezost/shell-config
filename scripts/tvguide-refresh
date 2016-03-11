@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Copyright © 2013 Alex Kost
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: tvguide-refresh
+Download TV guide and put it into a right place.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+guide_url='http://www.teleguide.info/download/new3/xmltv.xml.gz'
+backup_dir="$HOME/.tvtime/tvguide"
+guide_full="${backup_dir}/current_full.xml"
+guide_short="${backup_dir}/current_short.xml"
+
+# Day of Monday of the current week.
+date_part=$(date --date="$([ 1 -ne $(date +%u) ] && echo last) Monday" '+%Y-%m-%d')
+guide_name="xmltv_${date_part}.xml.gz"
+guide_path="${backup_dir}/${guide_name}"
+
+if [ -f "$guide_path" ]; then
+    echo "File '$guide_path' exists.  Update has not been made."
+    exit 0
+fi
+wget -O "$guide_path" "$guide_url"
+gunzip --stdout "$guide_path" > "$guide_full"
+tvguide.py "$guide_full" "$guide_short"

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: tvtime-sounded
+"Special" run of "tvtime": unmute "Line" channel, run "tvtime" and mute
+the channel again.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+setaudio -sq Line unmute
+tvtime
+setaudio -sq Line mute

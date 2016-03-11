@@ -1,0 +1,5 @@
+#!/bin/sh
+
+guild compile \
+      -Wunbound-variable -Wunused-variable \
+      -Wformat -Warity-mismatch "$@"

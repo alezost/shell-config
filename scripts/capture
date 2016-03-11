@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Original source: <https://gist.github.com/naelstrof/6530959>.
+
+IMAGE_DIR="$HOME/tmp/screenshots/"
+VIDEO_DIR="$HOME/tmp/screenshots/"
+IMAGE_ENCODING=".png"
+VIDEO_ENCODING=".gif"
+# VIDEO_ENCODING=".webm"
+IMAGE_SND="$HOME/docs/audio/small/screen-capture.oga"
+VIDEO_SND="$HOME/docs/audio/small/complete.oga"
+SLOP_IMAGE="slop --nodecorations --bordersize 3 --color 0,1,0"  # green
+SLOP_VIDEO="slop --nodecorations --bordersize 5 --color 1,0,0"  # red
+PID_FILE="/tmp/capture_record.pid"
+PLAY="play --no-show-progress"
+
+case "$1" in
+    desktop)
+        name="${IMAGE_DIR}$(date +%F_%T)${IMAGE_ENCODING}"
+        scrot "$name"
+        # maim "$name"  # XXX It doesn't work (bug in maim?)
+        $PLAY "$IMAGE_SND"
+        ;;
+    image)
+        eval $($SLOP_IMAGE)
+        [ "${Cancel}" = "true" ] && exit 0
+        name="${IMAGE_DIR}$(date +%F_%T)${IMAGE_ENCODING}"
+        maim --hidecursor --geometry $G "$name"
+        $PLAY "$IMAGE_SND"
+        ;;
+    video)
+        if [ -f "$PID_FILE" ]; then
+            # Finish recording.
+            pid=$(cat "$PID_FILE")
+            kill ${pid}
+            rm "$PID_FILE"
+            $PLAY "$VIDEO_SND"
+        else
+            # Start recording.
+            eval $($SLOP_VIDEO)
+            [ "${Cancel}" = "true" ] && exit 0
+            name="${VIDEO_DIR}$(date +%F_%T)${VIDEO_ENCODING}"
+            # Populate PID_FILE when recording begins using "&" and "$!".
+            # ffmpeg -f x11grab -s "${W}x${H}" -i "${DISPLAY}.0+${X},${Y}" -f alsa -i pulse "${server}/${name}${videoEncoding}" &
+            ffmpeg -f x11grab -framerate 2 \
+                   -s "${W}x${H}" -i "${DISPLAY}.0+${X},${Y}" \
+                   "$name" &
+            pid=$!
+            echo -n "$pid" > "$PID_FILE"
+        fi
+        ;;
+    *)
+        echo "Usage: $0 {image|video}"
+        exit 1
+        ;;
+esac

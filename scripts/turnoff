@@ -1,0 +1,135 @@
+#!/bin/sh
+
+# Copyright © 2012-2015 Alex Kost
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+LOGPATH="$HOME/.turnoff_log"
+SHUTDOWN=no
+CONKEROR=no
+TVTIME=no
+EMACS=no
+EMMS=no
+
+usage () {
+    echo 'Usage: turnoff [OPTION ...] [TIME]
+Switch to VT11 or shut down the computer with some preparations.
+
+Options:
+  -h, --help                    display help and exit;
+  -s, --shutdown [KEY]          shutdown (otherwise switch to VT11);
+  -c, --conkeror [KEY]          close conkeror;
+  -t, --tvtime [KEY]            close tvtime.
+  -e, --emacs [KEY]             close emacs;
+  -m, --emms [KEY]              stop EMMS.
+
+KEY is an optional argument: can be "yes" or "no" (default: "yes").
+
+TIME can be in any format, supported by GNU "date" function.'
+}
+
+TEMP=`getopt -o hs::c::t::e::m:: \
+             -l help,shutdown::,conkeror::,tvtime::,emacs::,emms:: \
+             -n turnoff -- "$@"`
+eval set -- "$TEMP"
+
+while true; do
+    case "$1" in
+	-h | --help)
+            usage
+            exit 0 ;;
+	-s | --shutdown)
+            case "$2" in
+		"") SHUTDOWN=yes ; shift 2 ;;
+		*) SHUTDOWN="$2" ; shift 2 ;;
+	    esac ;;
+        -c | --conkeror)
+            case "$2" in
+		"") CONKEROR=yes ; shift 2 ;;
+		*) CONKEROR="$2" ; shift 2 ;;
+	    esac ;;
+        -t | --tvtime)
+            case "$2" in
+		"") TVTIME=yes ; shift 2 ;;
+		*) TVTIME="$2" ; shift 2 ;;
+	    esac ;;
+        -e | --emacs)
+            case "$2" in
+		"") EMACS=yes ; shift 2 ;;
+		*) EMACS="$2" ; shift 2 ;;
+	    esac ;;
+        -m | --emms)
+            case "$2" in
+		"") EMMS=yes ; shift 2 ;;
+		*) EMMS="$2" ; shift 2 ;;
+	    esac ;;
+	--)
+            shift
+            break ;;
+	*)
+            echo "Internal error!"
+            exit 1 ;;
+    esac
+done
+
+if [ -z "$1" ]; then
+    DEADLINE=now
+    SECONDS=0
+else
+    DEADLINE="$1"
+    SECONDS=$(( $(date --date="$DEADLINE" +%s) - $(date +%s) ))
+fi
+
+echo "shutdown: $SHUTDOWN"
+echo "conkeror: $CONKEROR"
+echo "tvtime:   $TVTIME"
+echo "emacs:    $EMACS"
+echo "emms:     $EMMS"
+
+echo "---------------- $(date) ----------------" | tee -a "$LOGPATH"
+echo 'Computer will be turned off at "'$(date --date="$DEADLINE")\" | tee -a "$LOGPATH"
+echo "Sleeping for $SECONDS seconds..." | tee -a "$LOGPATH"
+sleep $SECONDS
+
+if [ $EMMS == "yes" ]; then
+    emacsclient --socket-name=server-emms --eval '(emms-stop)'
+    echo 'EMMS has been stopped ('$(date)')' | tee -a "$LOGPATH"
+    sleep 1
+fi
+
+if [ $EMACS == "yes" ]; then
+    wmctrl -x -c emacs
+    echo 'Closing emacs... ('$(date)')' | tee -a "$LOGPATH"
+    sleep 5
+fi
+
+if [ $CONKEROR == "yes" ]; then
+    wmctrl -x -c conkeror
+    echo 'Closing conkeror... ('$(date)')' | tee -a "$LOGPATH"
+    sleep 30
+fi
+
+if [ $TVTIME == "yes" ]; then
+    tvtime-command quit
+    echo 'Closing tvtime... ('$(date)')' | tee -a "$LOGPATH"
+    sleep 1
+fi
+
+if [ $SHUTDOWN == "yes" ]; then
+    echo -e 'Shutting down now... ('$(date)')'"\n" | tee -a "$LOGPATH"
+    shutdown now
+else
+    echo -e 'Switching to VT11 ('$(date)')'"\n" | tee -a "$LOGPATH"
+    sudo chvt 11
+fi

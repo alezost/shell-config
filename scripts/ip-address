@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: ip-address
+Return your external IP by prompting <http://ifconfig.me/ip>.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+curl "http://ifconfig.me/ip"

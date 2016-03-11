@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find /gnu/store -name "*$1*"

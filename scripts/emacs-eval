@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: emacs-eval arg
+Evaluate ARG as an Emacs Lisp expression (using "emacsclient --eval").
+Activate Emacs if it is not activated.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+emacsclient --eval "$1" &
+wmctrl -ia $(emacsclient --eval "(string-to-number (frame-parameter nil 'outer-window-id))")
+
+# # this variant shows the first emacs frame and it is very slow process -
+# # it would be better to define the active window by a C prog (using Xlib)
+# #if [ -z "$(xprop -id $(xprop -root | awk '/^_NET_ACTIVE_WINDOW/ { print $5; exit }') | grep 'WM_CLASS' | grep --only-matching 'emacs')" ]; then
+# if [ -z $(xprop -id $(xdotool getactivewindow) | grep 'WM_CLASS' | grep --only-matching 'emacs') ]; then
+#     wmctrl -xa emacs
+# fi

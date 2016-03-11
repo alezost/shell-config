@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xsane mustek_usb:libusb
