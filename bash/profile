@@ -109,7 +109,6 @@ export SDL_AUDIODRIVER=alsa
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-# Start shepherd if it is not running.  Some daemons sometimes need
-# DISPLAY (for example, irexec needs it for starting tvtime)
+# Start shepherd if it is not already running.
 [[ -z $(pgrep -U $(id --user) shepherd) ]] \
-    && DISPLAY=:0 shepherd &>> $HOME/.config/shepherd/shepherd.log
+    && shepherd &>> $HOME/.config/shepherd/shepherd.log
