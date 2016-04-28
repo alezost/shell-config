@@ -17,8 +17,7 @@ PLAY="play --no-show-progress"
 case "$1" in
     desktop)
         name="${IMAGE_DIR}$(date +%F_%T)${IMAGE_ENCODING}"
-        scrot "$name"
-        # maim "$name"  # XXX It doesn't work (bug in maim?)
+        maim "$name"
         $PLAY "$IMAGE_SND"
         ;;
     image)
