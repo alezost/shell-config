@@ -5,8 +5,7 @@
 IMAGE_DIR="$HOME/tmp/screenshots/"
 VIDEO_DIR="$HOME/tmp/screenshots/"
 IMAGE_ENCODING=".png"
-VIDEO_ENCODING=".gif"
-# VIDEO_ENCODING=".webm"
+VIDEO_ENCODING=".webm"
 IMAGE_SND="$HOME/docs/audio/small/screen-capture.oga"
 VIDEO_SND="$HOME/docs/audio/small/complete.oga"
 SLOP_IMAGE="slop --nodecorations --bordersize 3 --color 0,1,0"  # green
@@ -40,9 +39,8 @@ case "$1" in
             [ "${Cancel}" = "true" ] && exit 0
             name="${VIDEO_DIR}$(date +%F_%T)${VIDEO_ENCODING}"
             # Populate PID_FILE when recording begins using "&" and "$!".
-            # ffmpeg -f x11grab -s "${W}x${H}" -i "${DISPLAY}.0+${X},${Y}" -f alsa -i pulse "${server}/${name}${videoEncoding}" &
-            ffmpeg -f x11grab -framerate 2 \
-                   -s "${W}x${H}" -i "${DISPLAY}.0+${X},${Y}" \
+            ffmpeg -f x11grab \
+                   -s "${W}x${H}" -i "+${X},${Y}" \
                    "$name" &
             pid=$!
             echo -n "$pid" > "$PID_FILE"
