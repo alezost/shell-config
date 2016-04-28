@@ -50,7 +50,7 @@ case "$1" in
         fi
         ;;
     *)
-        echo "Usage: $0 {image|video}"
+        echo "Usage: $0 {desktop|image|video}"
         exit 1
         ;;
 esac
