@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #### HELP MESSAGE ##############################################
-hlp='Usage: vt-toggle
+hlp='Usage: toggle-vt
 Toggle VT7 (graphical) and VT11 (empty).'
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
