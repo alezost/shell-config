@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#### HELP MESSAGE ##############################################
+hlp='Usage: run-once PROGRAM [ARGS ...]
+Start PROGRAM if it is not already running.'
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "$hlp"
+    exit 0
+fi
+################################################################
+
+if [[ -z $(pgrep -U $(id --user) "^$1$") ]]; then
+    "$@"
+else
+    echo "$1 is already running"
+fi
