@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Original source:
+# <https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Software_toggle>.
+
+synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
