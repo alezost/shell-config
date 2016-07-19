@@ -87,8 +87,8 @@ export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
 export GUIX_PACKAGE_PATH="$MY_GUIX_DIR/guix-package-path"
 
 misc_guile_dirs="$MY_GUILE_DIR/modules:$MY_GUIX_DIR/modules:$HOME/devel/guix:$HOME/devel/shepherd/modules"
-export GUILE_LOAD_PATH="$misc_guile_dirs:$GUILE_LOAD_PATH"
-export GUILE_LOAD_COMPILED_PATH="$misc_guile_dirs:$GUILE_LOAD_COMPILED_PATH"
+export GUILE_LOAD_PATH="$misc_guile_dirs${GUILE_LOAD_PATH:+:}$GUILE_LOAD_PATH"
+export GUILE_LOAD_COMPILED_PATH="$misc_guile_dirs${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
 
 export EDITOR='emacsclient'
 export VIEWER='emacsclient'
