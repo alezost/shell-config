@@ -9,7 +9,7 @@ export MY_CONFIG_DIR="$HOME/config"
 export MY_GUILE_DIR="$MY_CONFIG_DIR/guile"
 export MY_GUIX_DIR="$MY_CONFIG_DIR/guix"
 export MY_SHELL_DIR="$MY_CONFIG_DIR/shell"
-export MY_PATH="$HOME/bin:$MY_GUILE_DIR/scripts:$MY_SHELL_DIR/scripts"
+export MY_PATH="$HOME/bin:$MY_GUILE_DIR/scripts:$MY_SHELL_DIR/scripts:$MY_CONFIG_DIR/guile-daemon/scripts"
 
 export MY_GUIX_PROFILES_DIR="$HOME/.guix-profiles"
 export MY_GUIX_USER_PROFILE_DIR="$MY_GUIX_PROFILES_DIR/main/main"
