@@ -62,10 +62,6 @@ set_guix_env
 if [ -d $MY_GUIX_SYSTEM_PROFILE_DIR ]; then   # if it is GuixSD
     export PATH="/run/setuid-programs:$PATH"
     export GIT_SSL_NO_VERIFY=1
-
-    # Ignore EMACSLOADPATH defined by "/etc/profile" because I know
-    # better what I want to load.
-    unset EMACSLOADPATH
 fi
 
 if [ -d $MY_GUIX_USER_PROFILE_DIR ]; then
