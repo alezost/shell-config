@@ -72,8 +72,6 @@ alias pacu='sudo pacman -U'
 
 alias reboot='sudo reboot'
 alias halt='sudo halt'
-alias shutdown='sudo shutdown'
-alias suspend='sudo systemctl start systemd-suspend'
 alias hyp-suspend='ssh root@hyperion "systemctl start systemd-suspend"'
 
 alias sc='sudo systemctl --no-pager'
