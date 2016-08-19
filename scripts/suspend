@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -d "/run/current-system" ]; then  # if GuixSD
+    sudo /run/current-system/profile/bin/suspend
+else
+    systemctl suspend
+fi
