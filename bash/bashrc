@@ -108,3 +108,6 @@ shopt -s checkwinsize
 # Unbind C-s and C-u.
 # stty -ixon
 stty kill ^- stop ^-
+
+# Disable 'suspend' builtin command as I use a script with the same name.
+enable -n suspend
