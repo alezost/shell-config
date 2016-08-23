@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sleep 1 # to move the hands away from keyboard
 if [ -d "/run/current-system" ]; then  # if GuixSD
     sudo /run/current-system/profile/bin/suspend
 else
