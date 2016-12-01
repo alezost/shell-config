@@ -53,6 +53,8 @@ set_guix_env () {
     fi
 }
 
+export LANG=en_US.UTF-8
+
 # Set XDG variables to default values if needed.
 [ ! -v XDG_DATA_DIRS ] && [ -d /usr/share ] && export XDG_DATA_DIRS=/usr/share
 [ ! -v XDG_CONFIG_DIRS ] && [ -d /etc/xdg ] && export XDG_CONFIG_DIRS=/etc/xdg
