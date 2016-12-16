@@ -88,12 +88,7 @@ export GUIX_PACKAGE_PATH="$MY_GUIX_DIR/guix-package-path"
 
 misc_guile_dirs="$MY_GUILE_DIR/modules:$MY_GUIX_DIR/modules:$HOME/devel/guix:$HOME/devel/shepherd/modules"
 export GUILE_LOAD_PATH="$misc_guile_dirs${GUILE_LOAD_PATH:+:}$GUILE_LOAD_PATH"
-# XXX Currently Guix does not set GUILE_LOAD_COMPILED_PATH properly.
-# This is a temporary workaround until commit
-# <http://git.savannah.gnu.org/cgit/guix.git/commit/?id=b036d6ddd61d8c070cf5488f08dde71ed43627ce>
-# will go to master.
-export GUILE_LOAD_COMPILED_PATH="$misc_guile_dirs:$MY_GUIX_PROFILES_DIR/guile/guile/lib/guile/2.0/site-ccache:$MY_GUIX_PROFILES_DIR/guile/guile/share/guile/site/2.0"
-# export GUILE_LOAD_COMPILED_PATH="$misc_guile_dirs${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
+export GUILE_LOAD_COMPILED_PATH="$misc_guile_dirs${GUILE_LOAD_COMPILED_PATH:+:}$GUILE_LOAD_COMPILED_PATH"
 
 export EDITOR='emacsclient'
 export VIEWER='emacsclient'
