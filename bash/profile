@@ -65,7 +65,6 @@ set_guix_env
 
 if [ -d $MY_GUIX_SYSTEM_PROFILE_DIR ]; then   # if it is GuixSD
     export PATH="/run/setuid-programs:$PATH"
-    export GIT_SSL_NO_VERIFY=1
 fi
 
 if [ -d $MY_GUIX_USER_PROFILE_DIR ]; then
@@ -80,6 +79,13 @@ if [ -d $MY_GUIX_USER_PROFILE_DIR ]; then
         # export ASPELL_CONF="data-dir $aspell_dir; dict-dir $aspell_dir"
         export ASPELL_CONF="dict-dir $aspell_dir"
     fi
+fi
+
+certs_dir=/var/guix/profiles/system/profile/etc/ssl/certs
+if [ -d "$certs_dir" ]; then
+    export SSL_CERT_DIR="$certs_dir"
+    export SSL_CERT_FILE="$certs_dir/ca-certificates.crt"
+    export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 fi
 
 export PATH="$MY_PATH:$PATH"
