@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Original source:
-# <https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Software_toggle>.
+name=$(xinput list --name-only | grep Touchpad)
 
-synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
+xinput set-prop "$name" "Device Enabled" \
+       $(xinput --list-props "$name" | grep -c 'Device Enabled.*0')
