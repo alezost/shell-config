@@ -3,7 +3,7 @@
 ################################################################
 ### Environment
 
-MY_GUIX_PROFILE_NAMES="emacs fonts games build guile misc main"
+MY_GUIX_PROFILE_NAMES="main build misc guile games fonts emacs"
 
 export MY_CONFIG_DIR="$HOME/config"
 export MY_GUILE_DIR="$MY_CONFIG_DIR/guile"
@@ -25,11 +25,11 @@ display_file_if_exists () {
 }
 
 display_guix_profiles_paths () {
-    display_file_if_exists "$MY_GUIX_SYSTEM_PROFILE_DIR"
     for name in $MY_GUIX_PROFILE_NAMES
     do
         display_file_if_exists "$MY_GUIX_PROFILES_DIR/$name/$name"
     done
+    display_file_if_exists "$MY_GUIX_SYSTEM_PROFILE_DIR"
 }
 
 set_guix_env () {
