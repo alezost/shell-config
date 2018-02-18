@@ -57,7 +57,8 @@ locale_dir="$MY_GUIX_PROFILES_DIR/locales/locales/lib/locale"
 [ -d "$locale_dir" ] && export GUIX_LOCPATH="$locale_dir"
 export LANG=en_US.UTF-8
 
-# Set XDG variables to default values if needed.
+# Set some variables to default values if needed.
+[ ! -v MANPATH ] && [ -d /usr/share/man ] && export MANPATH=/usr/share/man
 [ ! -v XDG_DATA_DIRS ] && [ -d /usr/share ] && export XDG_DATA_DIRS=/usr/share
 [ ! -v XDG_CONFIG_DIRS ] && [ -d /etc/xdg ] && export XDG_CONFIG_DIRS=/etc/xdg
 
