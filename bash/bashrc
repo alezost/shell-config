@@ -96,6 +96,7 @@ alias Restart='Herd restart'
 alias e='emacs --no-site-file &'
 alias eq='emacs -nw -Q'
 alias gc='guile-compile'
+alias m='mpv --quiet'
 
 ################################################################
 ### Misc
