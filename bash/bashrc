@@ -97,6 +97,9 @@ alias e='emacs --no-site-file &'
 alias eq='emacs -nw -Q'
 alias gc='guile-compile'
 alias m='mpv --quiet'
+alias y='youtube-dl'
+alias yg='youtube-dl -f22'
+alias yb='youtube-dl -f18'
 
 ################################################################
 ### Misc
