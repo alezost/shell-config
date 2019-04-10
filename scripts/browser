@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -x "$(command -v icecat)" ]; then
+    PROG=icecat
+else
+    PROG=firefox
+fi
+
+$PROG "$@" &> /dev/null
