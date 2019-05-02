@@ -101,6 +101,7 @@ alias my='mpv --quiet --ytdl'
 alias y='youtube-dl'
 alias yg='youtube-dl -f22'
 alias yb='youtube-dl -f18'
+alias ya='youtube-dl -f140'
 
 ################################################################
 ### Misc
