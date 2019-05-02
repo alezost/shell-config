@@ -103,6 +103,9 @@ alias yg='youtube-dl -f22'
 alias yb='youtube-dl -f18'
 alias ya='youtube-dl -f140'
 
+alias kill-gpg='gpg-connect-agent killagent /bye'
+alias kill-pulse='pulseaudio --kill'
+
 alias bat='upower -i $(upower -e | grep BAT)'
 
 ################################################################
