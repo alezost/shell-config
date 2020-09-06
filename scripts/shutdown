@@ -1,5 +1,6 @@
 #!/bin/sh
 
+w
 herd stop root
 sleep 2
 # Use 'halt' on GuixSD.
