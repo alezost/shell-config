@@ -10,7 +10,7 @@
 HISTCONTROL=erasedups:ignorespace
 HISTSIZE=1000
 HISTTIMEFORMAT='%Y-%m-%d %H:%M  '
-HISTIGNORE="cd:pwd:ls:l:ll:fg:bg:jobs:j"
+HISTIGNORE="m *:cd *:gui:shutdown*:pwd:ls:l:ll:fg:bg:jobs:j"
 HISTFILESIZE=9999
 
 # Double check of history substitutions.
