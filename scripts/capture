@@ -8,7 +8,7 @@ IMAGE_ENCODING=".png"
 VIDEO_ENCODING=".webm"
 IMAGE_SND="$HOME/docs/audio/small/screen-capture.oga"
 VIDEO_SND="$HOME/docs/audio/small/complete.oga"
-SLOP_IMAGE="slop --nodecorations --bordersize 3 --color 0,1,0"  # green
+SLOP_IMAGE='slop --format "%g" --nodecorations --bordersize 3 --color 0,1,0'  # green
 SLOP_VIDEO="slop --nodecorations --bordersize 5 --color 1,0,0"  # red
 PID_FILE="/tmp/capture_record.pid"
 PLAY="play --no-show-progress"
@@ -20,13 +20,14 @@ case "$1" in
         $PLAY "$IMAGE_SND"
         ;;
     image)
-        eval $($SLOP_IMAGE)
-        [ "${Cancel}" = "true" ] && exit 0
+        G=$(eval $SLOP_IMAGE)
         name="${IMAGE_DIR}$(date +%F_%T)${IMAGE_ENCODING}"
-        maim --hidecursor --geometry $G "$name"
+        maim --hidecursor --geometry=$G "$name"
         $PLAY "$IMAGE_SND"
         ;;
     video)
+        # TODO (2021-08-07) Should be updated as the "image" above
+        # (see <https://github.com/naelstrof/slop>).
         if [ -f "$PID_FILE" ]; then
             # Finish recording.
             pid=$(cat "$PID_FILE")
