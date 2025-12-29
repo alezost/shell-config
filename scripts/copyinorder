@@ -37,7 +37,7 @@ dest=$dest/$(basename "$source")
 
 echo -e "\n---- Making directory structure"
 mkdir -v "$dest"
-find . -type d | sed 1d | sort | xargs -I === mkdir -v "$dest/==="
+find . -type d | sed '1d ; s/^\(.*\)$/"\1"/' | sort | xargs -I === mkdir -v "$dest/==="
 
 filesAmount=$(find . -type f | wc -l)
 echo -e "\n---- Copying files (total $filesAmount):"
