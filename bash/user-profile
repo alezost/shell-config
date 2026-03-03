@@ -122,5 +122,7 @@ export SDL_AUDIODRIVER=alsa
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Start shepherd if it is not already running.
-[[ -z $(pgrep -U $(id --user) "^shepherd$") ]] \
-    && shepherd &>> $HOME/.config/shepherd/shepherd.log
+if [[ -z $(pgrep -U $(id --user) "^shepherd$") ]]; then
+    shepherd &>> $XDG_CONFIG_HOME/shepherd/shepherd.log
+    herd start daemons
+fi
