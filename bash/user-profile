@@ -126,3 +126,6 @@ if [[ -z $(pgrep -U $(id --user) "^shepherd$") ]]; then
     shepherd &>> $XDG_CONFIG_HOME/shepherd/shepherd.log
     herd start daemons
 fi
+
+# Start X server if it is not already running.
+[[ -z $(pgrep "^Xorg$") ]] && gui
