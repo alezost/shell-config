@@ -107,6 +107,10 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # Always show normal scrollbars.
 export GTK_OVERLAY_SCROLLING=0
 
+# This variable is used only to fix stumpwm/emacs keys interaction.
+# See <https://github.com/stumpwm/stumpwm/issues/1130>.
+export GDK_CORE_DEVICE_EVENTS=1
+
 # Prevent sox from using pulseaudio.
 export AUDIODRIVER=alsa
 # Without this, there is no sound in programs (usually games) that use
