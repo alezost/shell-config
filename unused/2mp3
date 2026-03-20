@@ -1,0 +1,24 @@
+#!/bin/sh
+
+OUT_DIR="$HOME/music"
+
+usage () {
+    echo "Usage: 2mp3 [FILES ...]
+Convert FILES to mp3 files and put them to <$OUT_DIR>."
+}
+
+case "$1" in
+    -h | --help)
+        usage
+        exit 0 ;;
+    *)
+        for in_file in "$@";
+        do
+            name=$(basename "$in_file") # with extension
+            name=${name%.*}             # without extension
+            out_file="$OUT_DIR/$name.mp3"
+            # echo $out_file
+            ffmpeg -i "$in_file" "$out_file"
+        done
+        ;;
+esac
