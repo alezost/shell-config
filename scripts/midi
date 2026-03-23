@@ -1,0 +1,8 @@
+#!/bin/sh
+
+systemctl --user stop pulseaudio.socket
+sleep 1
+qjackctl --start &
+qsynth
+
+systemctl --user start pulseaudio.socket
