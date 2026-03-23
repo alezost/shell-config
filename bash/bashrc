@@ -99,9 +99,11 @@ alias gc='guile-compile'
 alias m='mpv --quiet --msg-module --msg-level="ffmpeg/video=error,ffmpeg/demuxer=error"'
 alias my='mpv --quiet --ytdl'
 alias y='yt-dlp'
-alias yg='yt-dlp -f22'
+alias yf='yt-dlp -F'
+alias yg='yt-dlp --format bv[height=720]+ba --format-sort lang'
 alias yb='yt-dlp -f18'
-alias ya='yt-dlp -f140'
+alias ya='yt-dlp -fba'
+alias yl="yt-dlp -o '%(playlist)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s'"
 
 alias kill-gpg='gpg-connect-agent killagent /bye'
 alias kill-pulse='pulseaudio --kill'
