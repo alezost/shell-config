@@ -96,8 +96,12 @@ alias Restart='Herd restart'
 alias e='emacs --no-site-file &'
 alias eq='emacs -nw -Q'
 alias gc='guile-compile'
-alias m='mpv --quiet --msg-module --msg-level="ffmpeg/video=error,ffmpeg/demuxer=error"'
-alias my='mpv --quiet --ytdl'
+
+mpv_bv="best[height=720]/bv[height=720]+ba"
+export MPV_CMD="mpv --quiet --ytdl-format=$mpv_bv --ytdl-raw-options=format-sort=+fps,format-sort=lang"
+alias m="$MPV_CMD"
+alias tm="torsocks $MPV_CMD"
+
 alias y='yt-dlp'
 alias yf='yt-dlp -F'
 alias yg='yt-dlp --format bv[height=720]+ba --format-sort lang'
