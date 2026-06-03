@@ -93,8 +93,8 @@ alias Stop='Herd stop'
 alias Start='Herd start'
 alias Restart='Herd restart'
 
-alias e='emacs --no-site-file &'
-alias eq='emacs -nw -Q'
+alias e='emacs-emms'
+alias eq='emacs -Q'
 alias gc='guile-compile'
 
 mpv_bv="best[height=720]/bv[height=720]+ba"
