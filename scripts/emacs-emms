@@ -1,0 +1,8 @@
+#!/bin/sh
+
+TERM=xterm-256color
+CMD="emacsclient --socket-name=server-emms -c -e nil"
+
+if ! $CMD ; then
+    emacs --no-site-file --debug-init
+fi
