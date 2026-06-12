@@ -6,7 +6,7 @@ herd stop root
 sleep 1
 
 if [ -d "/run/current-system" ]; then  # if GuixSD
-    sudo /run/current-system/profile/sbin/halt
+    sudo /run/current-system/profile/sbin/reboot
 else
-    systemctl poweroff
+    systemctl reboot
 fi
