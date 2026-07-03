@@ -1,4 +1,4 @@
 #!/bin/sh
 
-emacsclient --socket-name=server --eval "(al/save-everything)"
-emacsclient --socket-name=server-emms --eval "(al/save-everything)"
+emacsclient --socket-name=emms --eval "(al/save-everything)"
+emacsclient --socket-name=main --eval "(al/save-everything)"
