@@ -124,9 +124,8 @@ export SDL_AUDIODRIVER=alsa
 
 # Start shepherd if it is not already running.
 if [[ -z $(pgrep -U $(id --user) "^shepherd$") ]]; then
-    shepherd &>> $XDG_CONFIG_HOME/shepherd/shepherd.log
-    herd start daemons
+    # export SHEPHERD_SERVICES=0  # uncomment to avoid starting default daemons
+    shepherd -l "$MY_CONFIG_DIR/shepherd/log" > /dev/null
+    # Start X server if it is not already running.
+    [[ -z $(pgrep "^Xorg$") ]] && herd start gui stumpwm unclutter emacs-emms
 fi
-
-# Start X server if it is not already running.
-[[ -z $(pgrep "^Xorg$") ]] && gui
