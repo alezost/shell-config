@@ -21,13 +21,13 @@ set show-all-if-ambiguous on
 "\er": reverse-search-history
 "\es": forward-search-history
 
-"\C-p": backward-delete-char
-"\ep": backward-kill-word
-"\eP": backward-kill-line
+"\C-,": backward-delete-char
+"\e,": backward-kill-word
+"\e<": backward-kill-line
 
-"\C-,": delete-char
-"\e,": kill-word
-"\e<": kill-line
+"\C-p": delete-char
+"\ep": kill-word
+"\eP": kill-line
 
 "\eA": beginning-of-history
 "\eI": end-of-history
@@ -37,8 +37,8 @@ set show-all-if-ambiguous on
 
 "\ex": transpose-words
 
-"\ek": copy-backward-word
-"\eq": copy-forward-word
+"\eq": copy-backward-word
+"\ek": copy-forward-word
 
 "\e;": insert-comment
 "\e#": complete-filename
