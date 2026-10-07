@@ -92,6 +92,7 @@ alias Restart='Herd restart'
 alias e='emacs-emms'
 alias eq='emacs -Q'
 alias gc='guile-compile'
+alias chez='scheme'
 
 mpv_bv="best[height=720]/bv[height=720]+ba"
 alias m="mpv --quiet"
