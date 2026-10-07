@@ -98,16 +98,15 @@ alias eq='emacs -Q'
 alias gc='guile-compile'
 
 mpv_bv="best[height=720]/bv[height=720]+ba"
-export MPV_CMD="mpv --quiet --ytdl-format=$mpv_bv --ytdl-raw-options=format-sort=+fps,format-sort=lang"
-alias m="$MPV_CMD"
-alias tm="torsocks $MPV_CMD"
+alias m="mpv --quiet"
 
 alias y='yt-dlp'
-alias yf='yt-dlp -F'
-alias yg='yt-dlp --format bv[height=720]+ba --format-sort lang'
-alias yb='yt-dlp -f18'
-alias ya='yt-dlp -fba'
-alias yl="yt-dlp -o '%(playlist)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s'"
+alias yf='y -F'
+alias yg="y --format $mpv_bv --format-sort lang"
+alias yb='y -f18/bv[height=360]+ba/best[height=360]'
+alias ya='y -fba/251/140'
+alias yl="y -o '%(playlist)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s'"
+alias ty="torsocks yt-dlp --format $mpv_bv"
 
 alias kill-gpg='gpg-connect-agent killagent /bye'
 alias kill-pulse='pulseaudio --kill'
